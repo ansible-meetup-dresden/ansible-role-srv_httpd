@@ -1,5 +1,47 @@
 ---
 # defaults file for httpd
 
-amdd_package_name: ""
-amdd_package_state: ""
+# Package Management
+
+amdd_httpd_package_name: "httpd"
+# State can be present|latest|absent
+amdd_httpd_package_state: "present"
+
+# Configuration Management
+
+amdd_httpd_conf_ServerName: "{{ ansible_hostname }}"
+# amdd_httpd_conf_ServerAdmin: ""
+amdd_httpd_conf_ServerRoot: "/etc/httpd"
+amdd_httpd_conf_User: "apache"
+amdd_httpd_conf_Group: "apache"
+amdd_httpd_conf_PidFile: "run/httpd.pid"
+amdd_httpd_conf_TraceEnable: "off"
+amdd_httpd_conf_FileETag: "None"
+amdd_httpd_conf_ServerTokens: "prod"
+amdd_httpd_conf_UseCanonicalName: "off"
+amdd_httpd_conf_ServerSignature: "on"
+amdd_httpd_conf_Listen: "80"
+amdd_httpd_conf_Timeout: "60"
+amdd_httpd_conf_MaxRequestWorkers: "100"
+amdd_httpd_conf_ModulesPath: "conf.modules.d/*.conf"
+amdd_httpd_conf_LogLevel: "warn"
+amdd_httpd_conf_ErrorLog: "logs/error.log"
+amdd_httpd_conf_ConfigPath: "conf.d/*.conf"
+
+# Service Management
+
+amdd_httpd_service_name: "httpd"
+# State can be started|stopped
+amdd_httpd_service_state: "started"
+amdd_httpd_service_enabled: true
+
+# Firewall Management
+
+# Use firewall management
+amdd_httpd_firewall_manage: false
+
+amdd_httpd_firewall_service: "http"
+# State can be enabled|disabled
+amdd_httpd_firewall_state: "enabled"
+amdd_httpd_firewall_immediate: true
+amdd_httpd_firewall_permanent: true
