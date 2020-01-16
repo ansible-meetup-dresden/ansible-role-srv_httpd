@@ -1,3 +1,5 @@
 ---
+# vars file for httpd
 
 amdd_httpd_package_name: "httpd"
+amdd_httpd_service_name: "httpd.service"
