@@ -6,21 +6,17 @@
 
     - name: "Manage httpd Configuration"
       template:
-        src: "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}_httpd.conf.j2"
-        dest: "/usr/local/etc/apache24/conf/httpd.conf"
-        owner: root
-        group: root
+        src: "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/httpd.conf.j2"
+        dest: "/usr/local/etc/apache24/httpd.conf"
+        owner: "root"
+        group: "wheel"
         mode: 0644
       notify: "Restart httpd Service"
     
-    - name: "Enable service"
+    - name: "Manage service"
       service:
         name: "{{ amdd_httpd_service_name }}"
         enabled: "{{ amdd_httpd_service_enabled }}"
-     
-    - name: "Start service"
-      service:
-        name: "{{ amdd_httpd_service_name }}"
         state: "{{ amdd_httpd_service_state }}"
   become: true
     
