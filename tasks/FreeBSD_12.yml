@@ -4,6 +4,15 @@
         name: "{{ amdd_httpd_package_name }}"
         state: "{{ amdd_httpd_package_state }}"
 
+    - name: "Manage httpd Configuration"
+      template:
+        src: "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}_httpd.conf.j2"
+        dest: "/usr/local/etc/apache24/conf/httpd.conf"
+        owner: root
+        group: root
+        mode: 0644
+      notify: "Restart httpd Service"
+    
     - name: "Enable service"
       service:
         name: "{{ amdd_httpd_service_name }}"
