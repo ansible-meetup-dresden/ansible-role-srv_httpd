@@ -1,0 +1,48 @@
+{{ ansible_managed | comment }}
+# This is a very minimal configuration.
+# You should define named VirtualHost Blocks in conf.d/*.conf
+
+ServerName                        {{ amdd_httpd_conf_ServerName }}
+{% if amdd_httpd_conf_ServerAdmin is defined %}
+ServerAdmin                       {{ amdd_httpd_conf_ServerAdmin }}
+{% endif %}
+
+ServerRoot                        {{ amdd_httpd_conf_ServerRoot }}
+User                              {{ amdd_httpd_conf_User }}
+Group                             {{ amdd_httpd_conf_Group }}
+PidFile                           {{ amdd_httpd_conf_PidFile }}
+
+TraceEnable                       {{ amdd_httpd_conf_TraceEnable }}
+FileETag                          {{ amdd_httpd_conf_FileETag }}
+ServerTokens                      {{ amdd_httpd_conf_ServerTokens }}
+UseCanonicalName                  {{ amdd_httpd_conf_UseCanonicalName }}
+ServerSignature                   {{ amdd_httpd_conf_ServerSignature }}
+
+Listen                            {{ amdd_httpd_conf_Listen }}
+
+Timeout                           {{ amdd_httpd_conf_Timeout }}
+MaxRequestWorkers                 {{ amdd_httpd_conf_MaxRequestWorkers }}
+
+# Load Modules
+Include                           {{ amdd_httpd_conf_ModulesPath }}
+
+LogLevel                          {{ amdd_httpd_conf_LogLevel }}
+ErrorLog                          {{ amdd_httpd_conf_ErrorLog }}
+
+<IfModule mime_module>
+  TypesConfig /etc/mime.types
+</IfModule>
+
+<IfModule mime_magic_module>
+  MIMEMagicFile conf/magic
+</IfModule>
+
+# Never change this block
+<Directory />
+  AllowOverride none
+  Require all denied
+</Directory>
+
+# Load additional config files.
+IncludeOptional {{ amdd_httpd_conf_ConfigPath }}
+
