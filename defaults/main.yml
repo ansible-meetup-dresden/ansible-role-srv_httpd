@@ -4,6 +4,7 @@
 # Package Management
 
 amdd_httpd_package_name: "httpd"
+# State can be present|latest|absent
 amdd_httpd_package_state: "present"
 
 # Configuration Management
@@ -30,12 +31,17 @@ amdd_httpd_conf_ConfigPath: "conf.d/*.conf"
 # Service Management
 
 amdd_httpd_service_name: "httpd"
+# State can be started|stopped
 amdd_httpd_service_state: "started"
 amdd_httpd_service_enabled: true
 
 # Firewall Management
 
+# Use firewall management
+amdd_httpd_firewall_manage: false
+
 amdd_httpd_firewall_service: "http"
+# State can be enabled|disabled
 amdd_httpd_firewall_state: "enabled"
 amdd_httpd_firewall_immediate: true
 amdd_httpd_firewall_permanent: true

@@ -10,13 +10,14 @@
 
 - name: "Manage httpd Configuration"
   template:
-    src: "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}_httpd.conf.j2"
+    src: "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/httpd.conf.j2"
     dest: "/etc/httpd/conf/httpd.conf"
     owner: "root"
     group: "root"
     mode: 0644
   become: true
   notify: "Restart httpd Service"
+  when: amdd_httpd_package_state != "absent"
 
 - name: "Manage httpd Service"
   service:
@@ -24,6 +25,7 @@
     state: "{{ amdd_httpd_service_state }}"
     enabled: "{{ amdd_httpd_service_enabled }}"
   become: true
+  when: amdd_httpd_package_state != "absent"
 
 - name: "Manage httpd Firewall"
   firewalld:
@@ -32,3 +34,4 @@
     immediate: "{{ amdd_httpd_firewall_immediate }}"
     permanent: "{{ amdd_httpd_firewall_permanent }}"
   become: true
+  when: amdd_httpd_firewall_manage | bool
