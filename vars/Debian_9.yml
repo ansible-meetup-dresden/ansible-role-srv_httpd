@@ -1,0 +1,8 @@
+---
+
+amdd_httpd_package_name: "apache2"
+amdd_httpd_package_state: "present"
+
+amdd_httpd_daemonamdd_httpd_service_name: "apache2"
+
+amdd_httpd_server_name: "debian9"

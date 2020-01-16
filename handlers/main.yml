@@ -1,2 +1,7 @@
 ---
 # handlers file for httpd
+
+- name: restart apache2
+  service:
+    name: "{{ amdd_httpd_daemon }}"
+    state: restarted
