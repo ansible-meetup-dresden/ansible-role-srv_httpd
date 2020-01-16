@@ -6,3 +6,4 @@
     name: "{{ amdd_httpd_service_name }}"
     state: "restarted"
   become: true
+  when: amdd_httpd_package_state != "absent"
